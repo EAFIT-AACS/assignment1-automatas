@@ -21,25 +21,23 @@ struct Automata {
 int main()
 {
 
-    cout << "Version de C++: " << __cplusplus << endl;
-
-    /*
-    // Number of cases
-    int numberOfCases;
-
-    ifstream file("dfa_cases.txt"); // Abre el archivo
+    ifstream file("dfas.txt"); // Abre el archivo
     
     if (file.fail())
     {
         cout << "Error al abrir el archivo..." << endl;
-        return;
+        return 1;
     }
     
-    
+    // Number of cases
+    int num_cases;
+    file >> num_cases; // Leer número de casos
+    file.ignore(); // Ignorar salto de línea
+
+    cout << "Number of cases: " << num_cases << endl;
 
     // Automata´s Array
-    Automata array[numberOfCases];
-*/
+    Automata array[num_cases];
+
     return 0;
 }
-

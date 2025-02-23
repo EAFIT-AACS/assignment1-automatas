@@ -6,4 +6,7 @@ Members -> Sebastian Salazar Henao and Emmanuel Cortes
 
 Class number -> Lenguajes Formales / Classroom Monday C2561 - SI2002-1 (7308)
 
-Specs -> We are using Windows 11, working with C++ version 
+Specs -> We are using Windows 11, working with C++ version 17
+
+Instructions -> Please download the text archive "dfas" and put in into "Minimizarion Algorithm" file.
+
