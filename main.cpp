@@ -50,7 +50,7 @@ int main()
     return 0;
 }
 
-void loadDfas(int num_cases, ifstream& file, vector<Automata>& automatas){
+void loadDfas(int num_cases, ifstream& file, vector<Automata>& automatasArray){
 
     for (int i = 0; i < num_cases; i++) {
         int num_states;
@@ -92,8 +92,8 @@ void loadDfas(int num_cases, ifstream& file, vector<Automata>& automatas){
     }
 }
 
-void showDfasArray(vector<Automata> automatas){
-    for (int i = 0; i < 10; i++)
+void showDfasArray(vector<Automata> automatasArray){
+    for (int i = 0; i < automatasArray.size(); i++)
     {
         cout << "\nDFA " << i + 1 << " - States: " << automatasArray[i].number_states << endl;
 
