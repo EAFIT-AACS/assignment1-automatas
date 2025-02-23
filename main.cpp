@@ -155,4 +155,3 @@ void separateStates(Automata dfa) {
     cout << endl;
 
 }
-
