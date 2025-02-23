@@ -35,14 +35,14 @@ int main()
 
     // Number of cases
     int num_cases;
-
     file >> num_cases;
     file.ignore();
-
     cout << "Number of cases: " << num_cases << endl;
 
+    // Load the DFA's from the txt and load them into the Automatas' Array
     loadDfas(num_cases, file, automatasArray);
     
+    // Show the DFA's
     showDfasArray(automatasArray);
     
     file.close();
@@ -93,6 +93,7 @@ void loadDfas(int num_cases, ifstream& file, vector<Automata>& automatasArray){
 }
 
 void showDfasArray(vector<Automata> automatasArray){
+
     for (int i = 0; i < automatasArray.size(); i++)
     {
         cout << "\nDFA " << i + 1 << " - States: " << automatasArray[i].number_states << endl;
@@ -115,3 +116,4 @@ void showDfasArray(vector<Automata> automatasArray){
         }
     }
 }
+
