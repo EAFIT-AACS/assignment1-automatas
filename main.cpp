@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,7 +21,8 @@ vector<Automata> automatasArray;
 
 // Functions
 void loadDfas(int num_cases, ifstream& file, vector<Automata>& automatasArray);
-void showDfasArray(vector<Automata> automatas);
+void showDfasArray(const vector<Automata>& automatas);
+void separateStates(Automata dfa);
 
 int main()
 {
@@ -45,6 +47,8 @@ int main()
     // Show the DFA's
     showDfasArray(automatasArray);
     
+    separateStates(automatasArray[0]);
+
     file.close();
     
     return 0;
@@ -92,7 +96,7 @@ void loadDfas(int num_cases, ifstream& file, vector<Automata>& automatasArray){
     }
 }
 
-void showDfasArray(vector<Automata> automatasArray){
+void showDfasArray(const vector<Automata>& automatasArray){
 
     for (int i = 0; i < automatasArray.size(); i++)
     {
@@ -115,5 +119,40 @@ void showDfasArray(vector<Automata> automatasArray){
             cout << endl;
         }
     }
+}
+
+void separateStates(Automata dfa) {
+    int n = dfa.number_states;
+
+    vector<int> totalStates;
+    vector<int> finalStates = dfa.finals;
+    vector<int> nonFinalStates;
+
+    // Fill the vector totalStates with all states of the DFA
+    for (int i = 0; i < n; i++) {
+        totalStates.push_back(i);
+    }
+
+    // Classify the states in Finals and Non-Finals
+    for (int state : totalStates) {
+        if (find(finalStates.begin(), finalStates.end(), state) == finalStates.end()) {
+            nonFinalStates.push_back(state);
+        }
+    }
+
+    // Show Non-Final states
+    cout << "Non-Final states: ";
+    for (int state : nonFinalStates) {
+        cout << state << " ";
+    }
+    cout << endl;
+
+    // Show Final states
+    cout << "Final States: ";
+    for (int state : finalStates) {
+        cout << state << " ";
+    }
+    cout << endl;
+
 }
 
