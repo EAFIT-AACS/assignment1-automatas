@@ -17,18 +17,29 @@ struct Automata {
 
 };
 
-// Number of cases
-int numberOfCases = 0;
-
-// Automata´s Array
-Automata array[numberOfCases];
 
 int main()
 {
 
+    cout << "Version de C++: " << __cplusplus << endl;
+
+    /*
+    // Number of cases
+    int numberOfCases;
+
+    ifstream file("dfa_cases.txt"); // Abre el archivo
+    
+    if (file.fail())
+    {
+        cout << "Error al abrir el archivo..." << endl;
+        return;
+    }
+    
+    
+
+    // Automata´s Array
+    Automata array[numberOfCases];
+*/
     return 0;
 }
 
-void cargarAutomatas(Automata array[numberOfCases]) {
-
-}
