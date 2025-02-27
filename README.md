@@ -1,57 +1,54 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Uzapeobl)
-
 *Project* -> Minimization Algorithm
 
 *Members* -> Sebastian Salazar Henao and Emmanuel Felipe Cortes Rincón
 
-*Class number* -> Lenguajes Formales / Classroom Monday C2561 - SI2002-1 (7308)
+*Class number* -> Formal Languages / Classroom Monday C2561 - SI2002-1 (7308)
 
 *Specs* -> We are using Windows 11, working with C++ version 17
 
-*Instructions* -> Download the text archive "dfas" and put it into "Minimization Algorithm" file. Please don't change the info of the txt, or if you want to put in it others DFA's, please follow the same structure.
+*Instructions* -> Download the text file "dfas" and place it in the "Minimization Algorithm" folder. Please do not alter the content of the txt file, or if you wish to add other DFAs, follow the same structure.
 
-*Explanation* -> Nuestro código está desarrollado en C++, y básicamente implementa la carga y análisis de Autómatas Finitos Deterministas (DFA) a partir de un archivo de texto. El objetivo principal es identificar estados equivalentes dentro de cada autómata, lo que permite minimizar el DFA. 
+*Explanation* -> Our code is developed in C++, and it essentially implements the loading and analysis of Deterministic Finite Automata (DFA) from a text file. The main objective is to identify equivalent states within each automaton, which allows for the minimization of the DFA.
 
-Para poder llevar esto a cabo nuestro código se divide en diferentes partes, cada una de ellas siendo fundamental para el desarrollo correcto del algoritmo. En una primera instancia, importamos algunas librerias necesarias, las cuales nos permiten usar ciertas funciones y hacer ciertas instancias que nos van a ayudar con ciertos procesos que ejecutamos en el código, como vectores, mapas y conjuntos. Así pues, las librerias que usamos fueron las siguientes:
+To achieve this, our code is divided into different parts, each of which is fundamental for the correct development of the algorithm. Initially, we import some necessary libraries, which allow us to use certain functions and create instances that will assist us with certain processes executed in the code, such as vectors, maps, and sets. Thus, the libraries we used are as follows:
 
-// Libraries
-#include <iostream> // Para entrada y salida de datos (cout, cin)
-#include <fstream> // Para trabajar con archivos
-#include <string> // Para trabajar con cadenas de texto
-#include <sstream> // Para convertir strings en flujos de datos
-#include <vector> // Para manejar listas dinámicas
-#include <algorithm> // Para usar funciones como "find"
-#include <map> // Para almacenar pares clave-valor
-#include <set> // Para manejar conjuntos (listas sin repetidos)
+#include <iostream> -> For data input and output (cout, cin)
+#include <fstream> -> For working with files
+#include <string> -> For working with text strings
+#include <sstream> -> For converting strings into data streams
+#include <vector> -> For handling dynamic lists
+#include <algorithm> -> For using functions like "find"
+#include <map> -> For storing key-value pairs
+#include <set> -> For handling sets (lists without duplicates)
 
-Luego, definimos una estructura llamada Automata, la cual representa un DFA. Esta estructura contiene cuatro componentes principales: number_states (que es el número total de estados que tiene el autómata), alphabet (el cual es un vector que contiene los símbolos del alfabeto del autómata), finals (un vector con los estados finales del autómata) y functions (que es una matriz de transiciones, donde cada fila representa un estado y cada columna representa el estado al que se llega con un símbolo del alfabeto).
+Next, we define a structure called Automata, which represents a DFA. This structure contains four main components: number_states (which is the total number of states in the automaton), alphabet (a vector containing the symbols of the automaton's alphabet), finals (a vector with the final states of the automaton), and functions (a transition matrix, where each row represents a state and each column represents the state reached with a symbol from the alphabet).
 
-Despues, declaramos un vector global "automatasArray", el cual almacena múltiples autómatas cargados desde el archivo txt. Además, definimos varias funciones: loadDfas() para poder leer los DFA desde el archivo txt, showDfasArray() para imprimir la información de los autómatas (este lo hicimos con el fin de comprobar si los automatas se estaban cargando correctamente, no lo mostramos en el output porque la actividad pide explicitamente mostrar solo los estados equivalentes, sin embargo, si se desea hacer uso de esta funcion, se puede hacer sin ningún tipo de problema, simplemente debes de llamarla en el main y pasarle como argumento el vector con los automatas), separateStates() para identificar los estados finales y no finales (esta función, al igual que la anterior, la creamos con el fin de comprobar como quedarian separados los estados de cada automata dependiendo de si es un estado final o uno No-final, de igual forma, no lo implementamos en el output porque no es lo que se está pidiendo, pero si se desea, se puede usar), y checkStateEquivalence() para encontrar los pares de estados equivalentes en un Automata Finito Determinista (DFA).
+After that, we declare a global vector "automatasArray", which stores multiple automata loaded from the txt file. Additionally, we define several functions: loadDfas() to read the DFAs from the txt file, showDfasArray() to print the information of the automata (we created this to verify if the automata were being loaded correctly, but we do not show it in the output because the activity explicitly requests to only show the equivalent states; however, if you wish to use this function, you can do so without any issues, simply call it in the main and pass the vector with the automata as an argument), separateStates() to identify the final and non-final states (this function, like the previous one, was created to check how the states of each automaton would be separated depending on whether it is a final or non-final state; similarly, it is not implemented in the output because it is not what is being asked, but it can be used if desired), and checkStateEquivalence() to find pairs of equivalent states in a Deterministic Finite Automaton (DFA).
 
-En la función principal main(), el programa abre el archivo llamado "dfas.txt", el cual contiene la información de varios DFA. Este archivo sigue una estructura en particular (tener en cuenta la estructura, ya que si no se seigue dicha estructura el programa no leera bien los automatas), en la primer linea se encuentra la cantidad de casos que se van a analizar, luego en la siguiente linea empieza el primer automata, y esta linea hace referencia a la cantidad de estados que tiene el automata, el siguiente renglón es el alfabeto, la siguiente linea indica los estados finales del DFA, y el resto de lineas indican las transiciones del automata (no hace falta especificar el estado, ya que al subirse al arreglo que propusimos en el código, la posicion en el vector indica el estado), y luego de esto estan plasmados los demás autómatas, que siguen la misma estructura. Si el archivo no puede abrirse, muestra un mensaje de error y finaliza la ejecución. Luego, se lee el número de autómatas y se llama a loadDfas() para almacenarlos en automatasArray. Finalmente en el main, para cada autómata cargado en el arreglo dinámico, se ejecuta checkStateEquivalence() con el fin de identificar sus estados equivalentes.
+In the main() function, the program opens a file called "dfas.txt", which contains the information of several DFAs. This file follows a specific structure (note the structure, as if it is not followed, the program will not read the automata correctly). The first line contains the number of cases to be analyzed, then the next line starts with the first automaton, and this line refers to the number of states in the automaton. The following line is the alphabet, the next line indicates the final states of the DFA, and the remaining lines indicate the transitions of the automaton (there is no need to specify the state, as when uploaded to the array we proposed in the code, the position in the vector indicates the state, in other words, it is not necessary to specify the state, as its position in the proposed array represents it). After this, the other automata are listed, following the same structure. If the file cannot be opened, an error message is displayed, and the execution ends. Then, the number of automata is read, and loadDfas() is called to store them in automatasArray. Finally, in the main, for each automaton loaded in the dynamic array, checkStateEquivalence() is executed to identify its equivalent states.
 
--------------- *Explicación de los Métodos* --------------
+-------------- *Explanation of the Methods* --------------
 
-[1]. La función loadDfas() lee cada DFA del archivo txt en un formato específico. Primero, obtiene el número de estados. Luego, lee el alfabeto como una lista de cadenas. A continuación, captura los estados finales y, finalmente, construye la tabla de transiciones del autómata en una matriz de enteros. Una vez que toda la información es extraída del archivo txt, lo que se hace es que se crea una estructura Automata y se almacena en automatasArray.
+[1]. The loadDfas() function reads each DFA from the txt file in a specific format. First, it obtains the number of states. Then, it reads the alphabet as a list of strings. Next, it captures the final states and, finally, constructs the transition table of the automaton in a matrix of integers. Once all the information is extracted from the txt file, an Automata structure is created and stored in automatasArray.
 
-[2]. La función showDfasArray() muestra en consola la información de cada autómata cargado. Imprime el número de estados, el alfabeto, los estados finales y la tabla de transiciones, iterando sobre cada fila y columna de la matriz de transiciones.
+[2]. The showDfasArray() function displays the information of each loaded automaton in the console. It prints the number of states, the alphabet, the final states, and the transition table, iterating over each row and column of the transition matrix.
 
-[3]. La función separateStates() lo que hace es clasificar los estados en finales y no finales de un automata. En primer lugar, llena un vector con todos los estados del DFA. Luego, revisa cuáles de esos estados no están en la lista de estados finales para luego separarlos en una nueva vector de estados no finales.
+[3]. The separateStates() function classifies the states into final and non-final states of an automaton. First, it fills a vector with all the states of the DFA. Then, it checks which of these states are not in the list of final states to separate them into a new vector of non-final states.
 
-[4]. Finalmente, la función checkStateEquivalence() es la que lleva el proceso de minimización de estados. Inicialmente, clasifica los estados en dos grupos: finales y no finales. Luego, el siguiente paso es aplicar un procedimiento iterativo donde se compara la tabla de transiciones de cada estado para así poder detectar patrones similares. Se utilizan mapas para agrupar estados con el mismo comportamiento y se generan pares de estados equivalentes. Si dos estados siempre llevan a las mismas clases de equivalencia, se consideran indistinguibles y se agrupan.
+[4]. Finally, the checkStateEquivalence() function carries out the state minimization process. Initially, it classifies the states into two groups: final and non-final. Then, the next step is to apply an iterative procedure where the transition table of each state is compared to detect similar patterns. Maps are used to group states with the same behavior, and pairs of equivalent states are generated. If two states always lead to the same equivalence classes, they are considered indistinguishable and are grouped together.
 
-Al final, el programa muestra en consola (output) los pares de estados equivalentes que se han detectado de cada Automata Finito Determinista DFA.
+At the end, the program displays in the console (output) the pairs of equivalent states detected for each Deterministic Finite Automaton DFA.
 
--------------- *Lógica de la Función checkStateEquivalence()* --------------
+-------------- *Logic of the checkStateEquivalence() Function* --------------
 
-Este es el núcleo del programa y su lógica es la lógica es la siguiente:
+This is the core of the program, and its logic is as follows:
 
-[a]. *Partición inicial*: Inicialmente, clasifica los estados en finales (marcados con clase 1) y no finales (marcados con clase 2).
+[a]. *Initial Partition*: Initially, it classifies the states into final (marked with class 1) and non-final (marked with class 2).
 
-[b]. *Refinamiento iterativo*: En cada iteración, refina las clases existentes según el comportamiento de los estados. Dos estados están en la misma clase solo si: Actualmente están en la misma clase, para cada símbolo del alfabeto, las transiciones desde estos estados conducen a estados que están en la misma clase
+[b]. *Iterative Refinement*: In each iteration, it refines the existing classes based on the behavior of the states. Two states are in the same class only if: They are currently in the same class, and for each symbol in the alphabet, the transitions from these states lead to states that are in the same class.
 
-[c]. *Proceso de refinamiento*: Para cada estado, crea una "firma" o "clave" que consiste en su clase actual más las clases de los estados a los que transita. Así pues, estados con la misma firma se colocan en la misma nueva clase. Este proceso continúa hasta que no haya más cambios en las clases.
+[c]. *Refinement Process*: For each state, it creates a "signature" or "key" consisting of its current class plus the classes of the states it transitions to. Thus, states with the same signature are placed in the same new class. This process continues until there are no more changes in the classes.
 
-[d]. *Identificación de pares equivalentes*: Una vez que el proceso de refinamiento se completa, los estados en la misma clase son equivalentes.
+[d]. *Identification of Equivalent Pairs*: Once the refinement process is complete, the states in the same class are equivalent.
 
-[e]. *Final*: El programa crea pares de estados equivalentes de cada clase que tenga más de un estado. Como resultado el programa imprime los pares de estados equivalentes encontrados para cada DFA. Los pares tienen la forma (estado1, estado2) indicando que estos estados son equivalentes.
+[e]. *Final*: The program creates pairs of equivalent states from each class that has more than one state. As a result, the program prints the pairs of equivalent states found for each DFA. The pairs are in the form (state1, state2), indicating that these states are equivalent.

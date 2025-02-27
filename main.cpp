@@ -1,12 +1,12 @@
 // Libraries
-#include <iostream>  // Para entrada y salida de datos (cout, cin)
-#include <fstream>   // Para trabajar con archivos
-#include <string>    // Para trabajar con cadenas de texto
-#include <sstream>   // Para convertir strings en flujos de datos
-#include <vector>    // Para manejar listas dinámicas
-#include <algorithm> // Para usar funciones como "find"
-#include <map>       // Para almacenar pares clave-valor
-#include <set>       // Para manejar conjuntos (listas sin repetidos)
+#include <iostream>  // For input and output (cout, cin)
+#include <fstream>   // For working with files
+#include <string>    // For handling text strings
+#include <sstream>   // For converting strings into data streams
+#include <vector>    // For handling dynamic lists
+#include <algorithm> // For using functions like "find"
+#include <map>       // For storing key-value pairs
+#include <set>       // For handling sets (lists without duplicates)
 
 using namespace std;
 
@@ -220,7 +220,6 @@ void checkStateEquivalence(const Automata &dfa)
         }
     } while (changed);
 
-    // Generar pares de equivalencias en lugar de conjuntos
     set<pair<int, int>> equivalencePairs;
     map<int, vector<int>> partitions;
     for (int i = 0; i < dfa.number_states; i++)
