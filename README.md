@@ -38,7 +38,7 @@ En la función principal main(), el programa abre el archivo llamado "dfas.txt",
 
 [3]. La función separateStates() lo que hace es clasificar los estados en finales y no finales de un automata. En primer lugar, llena un vector con todos los estados del DFA. Luego, revisa cuáles de esos estados no están en la lista de estados finales para luego separarlos en una nueva vector de estados no finales.
 
-[4]. Finalmente, la función checkStateEquivalence() es la que lleva el proceso de minimización de estados. Inicialmente, clasifica los estados en dos grupos: finales y no finales. Luego, lo que procede a hacer es aplicar un procedimiento iterativo donde compara la tabla de transiciones de cada estado para detectar patrones similares. Se utilizan mapas para agrupar estados con el mismo comportamiento y se generan pares de estados equivalentes. Si dos estados siempre llevan a las mismas clases de equivalencia, se consideran indistinguibles y se agrupan.
+[4]. Finalmente, la función checkStateEquivalence() es la que lleva el proceso de minimización de estados. Inicialmente, clasifica los estados en dos grupos: finales y no finales. Luego, el siguiente paso es aplicar un procedimiento iterativo donde se compara la tabla de transiciones de cada estado para así poder detectar patrones similares. Se utilizan mapas para agrupar estados con el mismo comportamiento y se generan pares de estados equivalentes. Si dos estados siempre llevan a las mismas clases de equivalencia, se consideran indistinguibles y se agrupan.
 
 Al final, el programa muestra en consola (output) los pares de estados equivalentes que se han detectado de cada Automata Finito Determinista DFA.
 
@@ -55,4 +55,3 @@ Este es el núcleo del programa y su lógica es la lógica es la siguiente:
 [d]. *Identificación de pares equivalentes*: Una vez que el proceso de refinamiento se completa, los estados en la misma clase son equivalentes.
 
 [e]. *Final*: El programa crea pares de estados equivalentes de cada clase que tenga más de un estado. Como resultado el programa imprime los pares de estados equivalentes encontrados para cada DFA. Los pares tienen la forma (estado1, estado2) indicando que estos estados son equivalentes.
-
