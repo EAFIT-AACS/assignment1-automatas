@@ -1,12 +1,12 @@
 // Libraries
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <vector>
-#include <algorithm>
-#include <map>
-#include <set>
+#include <iostream>  // Para entrada y salida de datos (cout, cin)
+#include <fstream>   // Para trabajar con archivos
+#include <string>    // Para trabajar con cadenas de texto
+#include <sstream>   // Para convertir strings en flujos de datos
+#include <vector>    // Para manejar listas dinámicas
+#include <algorithm> // Para usar funciones como "find"
+#include <map>       // Para almacenar pares clave-valor
+#include <set>       // Para manejar conjuntos (listas sin repetidos)
 
 using namespace std;
 
@@ -26,7 +26,7 @@ vector<Automata> automatasArray;
 void loadDfas(int num_cases, ifstream &file, vector<Automata> &automatasArray);
 void showDfasArray(const vector<Automata> &automatas);
 vector<int> separateStates(Automata dfa);
-void checkStateEquivalence(const Automata& dfa);
+void checkStateEquivalence(const Automata &dfa);
 
 int main()
 {
@@ -51,7 +51,8 @@ int main()
     // Show the DFA's
     // showDfasArray(automatasArray);
 
-    for (const auto& dfa : automatasArray) {
+    for (const auto &dfa : automatasArray)
+    {
         checkStateEquivalence(dfa);
     }
 
@@ -110,7 +111,6 @@ void loadDfas(int num_cases, ifstream &file, vector<Automata> &automatasArray)
 
 void showDfasArray(const vector<Automata> &automatasArray)
 {
-
     for (int i = 0; i < automatasArray.size(); i++)
     {
         cout << "\nDFA " << i + 1 << " - States: " << automatasArray[i].number_states << endl;
@@ -161,52 +161,60 @@ vector<int> separateStates(Automata dfa)
         }
     }
 
-    /*
     // Show Non-Final states
     cout << "Non-Final states: ";
-    for (int state : nonFinalStates) {
+    for (int state : nonFinalStates)
+    {
         cout << state << " ";
     }
     cout << endl;
 
     // Show Final states
     cout << "Final States: ";
-    for (int state : finalStates) {
+    for (int state : finalStates)
+    {
         cout << state << " ";
     }
     cout << endl;
-*/
+
     return nonFinalStates;
 }
 
-void checkStateEquivalence(const Automata& dfa) {
+void checkStateEquivalence(const Automata &dfa)
+{
     vector<int> stateClass(dfa.number_states, 0);
     set<int> finalSet(dfa.finals.begin(), dfa.finals.end());
 
-    for (int i = 0; i < dfa.number_states; i++) {
+    for (int i = 0; i < dfa.number_states; i++)
+    {
         stateClass[i] = (finalSet.count(i) > 0) ? 1 : 2;
     }
 
     bool changed;
-    do {
+    do
+    {
         changed = false;
         map<vector<int>, int> newClasses;
         vector<int> newStateClass(dfa.number_states);
         int classId = 1;
 
-        for (int i = 0; i < dfa.number_states; i++) {
+        for (int i = 0; i < dfa.number_states; i++)
+        {
             vector<int> key = {stateClass[i]};
-            for (int j : dfa.functions[i]) {
+            for (int j : dfa.functions[i])
+            {
                 key.push_back(stateClass[j]);
             }
 
-            if (newClasses.find(key) == newClasses.end()) {
+            if (newClasses.find(key) == newClasses.end())
+            {
                 newClasses[key] = classId++;
             }
             newStateClass[i] = newClasses[key];
         }
 
-        if (newStateClass != stateClass) {
+        if (newStateClass != stateClass)
+        {
             stateClass = newStateClass;
             changed = true;
         }
@@ -215,23 +223,29 @@ void checkStateEquivalence(const Automata& dfa) {
     // Generar pares de equivalencias en lugar de conjuntos
     set<pair<int, int>> equivalencePairs;
     map<int, vector<int>> partitions;
-    for (int i = 0; i < dfa.number_states; i++) {
+    for (int i = 0; i < dfa.number_states; i++)
+    {
         partitions[stateClass[i]].push_back(i);
     }
 
     cout << "Equivalence pairs for this DFA:" << endl;
-    for (const auto& part : partitions) {
-        const vector<int>& states = part.second;
-        if (states.size() > 1) {
-            for (size_t i = 0; i < states.size(); i++) {
-                for (size_t j = i + 1; j < states.size(); j++) {
+    for (const auto &part : partitions)
+    {
+        const vector<int> &states = part.second;
+        if (states.size() > 1)
+        {
+            for (size_t i = 0; i < states.size(); i++)
+            {
+                for (size_t j = i + 1; j < states.size(); j++)
+                {
                     equivalencePairs.insert({states[i], states[j]});
                 }
             }
         }
     }
 
-    for (const auto& p : equivalencePairs) {
+    for (const auto &p : equivalencePairs)
+    {
         cout << "(" << p.first << ", " << p.second << ") ";
     }
     cout << endl;
